@@ -19,8 +19,17 @@
     "Google",
     "GitHub"
   ],
-  "author": "Bohdan Lukianchenko",
+  "author": "Bohdan Lukianchenko <bohdan.lukianchenko@gmail.com> (https://bohdan-lukianchenko.vercel.app)",
   "license": "ISC",
+  "homepage": "https://github.com/bohandsomn/error-handler-ai",
+  "bugs": {
+    "url": "https://github.com/bohandsomn/error-handler-ai/issues",
+    "email": "bohdan.lukianchenko@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bohandsomn/error-handler-ai.git"
+  },
   "devDependencies": {
     "nodemon": "^3.0.1",
     "ts-loader": "^9.4.4",
