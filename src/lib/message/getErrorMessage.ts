@@ -9,8 +9,8 @@ export function getErrorMessage(error: unknown): string {
     } else {
         message = ''
     }
-    const withoutPaths = message.replace(/@[^\s]+/g, '*')
-    const withoutQuotationMarks = withoutPaths.replace(/"[^"]+"/g, '*')
-    const withoutSpaces = withoutQuotationMarks.replace(/ /g, '%20')
-    return withoutSpaces
+    return message.replace(/@[^\s]+/g, '*')
+        .replace(/"[^"]+"/g, '*')
+        .slice(0, 100)
+        .replace(/ /g, '%20')
 }
