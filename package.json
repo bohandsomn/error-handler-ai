@@ -1,6 +1,6 @@
 {
   "name": "error-handler-ai",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "description": "Handles errors that may occur while the program is running. Under the hood of the program, modern solutions are used, which are actively used by developers now",
   "type": "commonjs",
