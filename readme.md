@@ -4,6 +4,14 @@ Handles errors that may occur while the program is running. Under the hood of th
 
 You can use this package to speed up error detection and resolution. Popular solutions such as `ChatGPT`, `Bing`, `StackOverflow`, `Google`, `GitHub` are used under the hood.
 
+## Objectives
+
+How do you usually solve a problem that is lit up in the console? More often than not, you copy this error and google / ask in ChatGPT etc. But the error contains file paths or double-quoted text that makes it difficult to find a solution.
+
+This package will allow you to receive a response as soon as it has been caught by the program. You will have a direct link to google search, GitHub search or StackOverflow.
+
+Also, artificial intelligence such as ChatGPT or Microsoft's Bing can respond immediately when this error has been caught by the program.
+
 ## Installation
 
 ```
