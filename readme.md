@@ -55,7 +55,9 @@ interface IBuilderAi {
 
 ## Usage
 
-You can use `BuilderAi` to create an ai service that implements the IAi interface. It is a combination of services that you add with setters
+You can use `BuilderAi` to create an ai service that implements the IAi interface. It is a combination of services that you add with setters.
+
+**NOTE:** It is recommended to use in `development` mode.
 
 ```
 import { BuilderAi } from 'error-handler-ai'
