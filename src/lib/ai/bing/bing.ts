@@ -18,15 +18,19 @@ export class BingAi implements IAi {
     }
 
     async catch(error: unknown): Promise<string> {
-        const header = 'Possible ways according to ai Bing microsoft'
-        const task = 'Find the solution to the following error:'
-        const message = getErrorMessage(error)
-        const request = this.requestAdapter(task, message)
-        const response = await this.client.sendMessage(request, {
-            variant: this.variant,
-        })
-        const solution = this.responseAdapter(response)
-        return `${header}:\n${solution}`
+        try {
+            const header = 'Possible ways according to ai Bing microsoft'
+            const task = 'Find the solution to the following error:'
+            const message = getErrorMessage(error)
+            const request = this.requestAdapter(task, message)
+            const response = await this.client.sendMessage(request, {
+                variant: this.variant,
+            })
+            const solution = this.responseAdapter(response)
+            return `${header}:\n${solution}`
+        } catch (error) {
+            return ''
+        }
     }
 
     private requestAdapter(task: string, message: string) {
