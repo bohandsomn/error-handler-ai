@@ -17,7 +17,11 @@
     "Bing",
     "StackOverflow",
     "Google",
-    "GitHub"
+    "GitHub",
+    "Artificial intelligence",
+    "AI",
+    "Error handler",
+    "Debugger"
   ],
   "author": "Bohdan Lukianchenko <bohdan.lukianchenko@gmail.com> (https://bohdan-lukianchenko.vercel.app)",
   "license": "ISC",
