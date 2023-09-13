@@ -4,6 +4,12 @@ Handles errors that may occur while the program is running. Under the hood of th
 
 You can use this package to speed up error detection and resolution. Popular solutions such as `ChatGPT`, `Bing`, `StackOverflow`, `Google`, `GitHub` are used under the hood.
 
+# Installation
+
+```
+npm install error-handler-ai
+```
+
 ## Usage
 
 You can use `BuilderAi` to create an ai service that implements the IAi interface. It is a combination of services that you add with setters
