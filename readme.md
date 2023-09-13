@@ -60,7 +60,7 @@ You can use `BuilderAi` to create an ai service that implements the IAi interfac
 **NOTE:** It is recommended to use in `development` mode.
 
 ```
-import { BuilderAi } from 'error-handler-ai'
+import { BuilderAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new BuilderAi()
@@ -110,7 +110,7 @@ q=database%20failed%20to%20connect
 You can also use the services separately, namely: `BingAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
 
 ```
-import { BingAi } from './lib'
+import { BingAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new BingAi({
@@ -140,7 +140,7 @@ bootstrap()
 - In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
 
 ```
-import { ChatGptAi } from './lib'
+import { ChatGptAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new ChatGptAi({
@@ -164,7 +164,7 @@ bootstrap()
 **NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
 
 ```
-import { GitHubAi } from './lib'
+import { GitHubAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new GitHubAi()
@@ -184,7 +184,7 @@ bootstrap()
 ```
 
 ```
-import { GoogleAi } from './lib'
+import { GoogleAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new GoogleAi()
@@ -204,7 +204,7 @@ bootstrap()
 ```
 
 ```
-import { StackOverflowAi } from './lib'
+import { StackOverflowAi } from "error-handler-ai"
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new StackOverflowAi()
