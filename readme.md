@@ -62,13 +62,13 @@ You can use `BuilderAi` to create an ai service that implements the IAi interfac
 ```
 import { BuilderAi } from 'error-handler-ai'
 
-const  isDev  =  process.env.NODE_ENV  ===  'development'
-const  ai  =  new  BuilderAi()
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new BuilderAi()
   .setBing({
-    cookie:  process.env.BING_COOKIE!
+    cookie: process.env.BING_COOKIE!
   })
   .setChatGpt({
-    apiKey:  process.env.CHAT_GPT_API_KEY!
+    apiKey: process.env.CHAT_GPT_API_KEY!
   })
   .setGoogle()
   .setGutHub()
@@ -86,6 +86,25 @@ async  function  bootstrap() {
   }
 }
 bootstrap()
+```
+
+### Example of response:
+
+```console
+Possible ways to solve the problem:
+Possible ways according to ai Bing microsoft:
+There are various causes for database connection failures, such as incorrect database
+information, firewall settings, corrupt database, or unresponsive database server.
+Depending on the type of database you are using, you may need to troubleshoot different
+issues.
+Possible ways according to GitHub:
+Go to the following link: https://github.com/search?q=database%20failed%20to%20connect&
+type=issues
+Possible ways according to Google:
+Go to the following link: https://www.google.com/search?q=database%20failed%20to%20connect
+Possible ways according to StackOverflow:
+Go to the following link: https://stackoverflow.com/search?
+q=database%20failed%20to%20connect
 ```
 
 You can also use the services separately, namely: `BingAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
