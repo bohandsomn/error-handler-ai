@@ -67,6 +67,14 @@ async function bootstrap() {
 bootstrap()
 ```
 
+**NOTE:** In order for you to be able to use `BingAi`, you must provide a `cookie` that you can receive in your Microsoft Edge browser:
+
+- Open the Microsoft Edge browser;
+- Go to the Microsoft Bing [chat page](https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx);
+- Open the dev tools tab `ctrl + shift + I`;
+- Open the Application tab;
+- In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
+
 ```
 import { ChatGptAi } from './lib'
 
@@ -88,6 +96,8 @@ async function bootstrap() {
 
 bootstrap()
 ```
+
+**NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
 
 ```
 import { GitHubAi } from './lib'
