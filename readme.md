@@ -69,7 +69,7 @@ interface IBuilderAi {
 
 You can use `BuilderAi` to create an ai service that implements the IAi interface. It is a combination of services that you add with setters.
 
-**NOTE:** It is recommended to use in `development` mode.
+> **NOTE:** It is recommended to use in `development` mode.
 
 ```ts
 import { BuilderAi } from 'error-handler-ai'
@@ -143,13 +143,13 @@ async function bootstrap() {
 bootstrap()
 ```
 
-**NOTE:** In order for you to be able to use `BingAi`, you must provide a `cookie` that you can receive in your Microsoft Edge browser:
+> **NOTE:** In order for you to be able to use `BingAi`, you must provide a `cookie` that you can receive in your Microsoft Edge browser:
 
-- Open the Microsoft Edge browser;
-- Go to the Microsoft Bing [chat page](https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx);
-- Open the dev tools tab `ctrl + shift + I`;
-- Open the Application tab;
-- In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
+1. Open the Microsoft Edge browser;
+2. Go to the Microsoft Bing [chat page](https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx);
+3. Open the dev tools tab `ctrl + shift + I`;
+4. Open the Application tab;
+5. In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
 
 ```ts
 import { ChatGptAi } from 'error-handler-ai'
@@ -173,7 +173,7 @@ async function bootstrap() {
 bootstrap()
 ```
 
-**NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
+> **NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
 
 ```ts
 import { GitHubAi } from 'error-handler-ai'
