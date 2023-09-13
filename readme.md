@@ -4,10 +4,53 @@ Handles errors that may occur while the program is running. Under the hood of th
 
 You can use this package to speed up error detection and resolution. Popular solutions such as `ChatGPT`, `Bing`, `StackOverflow`, `Google`, `GitHub` are used under the hood.
 
-# Installation
+## Installation
 
 ```
 npm install error-handler-ai
+```
+
+## API Reference
+
+#### IBingAiOptions
+
+| Parameter | Type       | Description                                  |
+| :-------- | :--------- | :------------------------------------------- |
+| `cookie`  | `string`   | **Required**. \_U cookie from Microsoft Edge |
+| `variant` | `IVariant` | **Default:** `"Creative"`.                   |
+
+`type IVariant = "Balanced" | "Precise" | "Creative"`
+
+#### IChatGptAiOptions
+
+| Parameter | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `apiKey`  | `string` | **Required**. apiKey from OpenAI   |
+| `model`   | `IModel` | **Default:** `"text-davinci-003"`. |
+
+`type IModel = "babbage-002" | "davinci-002" | "text-davinci-003" | "text-davinci-002" | "text-davinci-001" | "code-davinci-002" | "text-curie-001" | "text-babbage-001" | "text-ada-001"`
+
+#### IAi
+
+Method `catch` takes one error and returns the solution.
+
+```
+interface IAi {
+  catch(error: unknown): Promise<string>
+}
+```
+
+#### IBuilderAi
+
+```
+interface IBuilderAi {
+    setBing(options: IBingAiOptions): this
+    setChatGpt(options: IChatGptAiOptions): this
+    setGutHub(): this
+    setGoogle(): this
+    setStackOverflow(): this
+    build(): IAi
+}
 ```
 
 ## Usage
