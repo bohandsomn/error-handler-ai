@@ -7,7 +7,6 @@ import { IBingAiOptions, IVariant } from './type'
 export class BingAi implements IAi {
     private readonly variant: IVariant
     private readonly client: BingChat
-    readonly header = 'Possible ways according to ai Bing microsoft'
 
     constructor(options: IBingAiOptions) {
         const { cookie, variant } = options
@@ -19,6 +18,7 @@ export class BingAi implements IAi {
     }
 
     async catch(error: unknown): Promise<string> {
+        const header = 'Possible ways according to ai Bing microsoft'
         const task = 'Find the solution to the following error:'
         const message = getErrorMessage(error)
         const request = this.requestAdapter(task, message)
@@ -26,7 +26,7 @@ export class BingAi implements IAi {
             variant: this.variant,
         })
         const solution = this.responseAdapter(response)
-        return solution
+        return `${header}:\n${solution}`
     }
 
     private requestAdapter(task: string, message: string) {

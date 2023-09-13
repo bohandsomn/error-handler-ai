@@ -14,5 +14,4 @@ export interface IAi {
      * @returns {Promise<string>} solution
      */
     catch(error: unknown): Promise<string>
-    header: string
 }

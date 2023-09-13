@@ -7,7 +7,6 @@ import { IChatGptAiOptions, IModel } from "./type"
 export class ChatGptAi implements IAi {
     private readonly client: OpenAI
     private readonly model: IModel
-    readonly header = 'Possible ways according to ai ChatGPT'
 
     constructor(options: IChatGptAiOptions) {
         const { apiKey, model } = options
@@ -19,12 +18,13 @@ export class ChatGptAi implements IAi {
     }
 
     async catch(error: unknown): Promise<string> {
+        const header = 'Possible ways according to ai ChatGPT'
         const task = 'Find the solution to the following error:'
         const message = getErrorMessage(error)
         const request = this.requestAdapter(task, message)
         const response = await this.client.completions.create(request)
         const solution = this.responseAdapter(response)
-        return solution
+        return `${header}:\n${solution}`
     }
 
     private requestAdapter(task: string, message: string) {
