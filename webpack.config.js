@@ -1,8 +1,8 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 
-module.exports = {
-  mode: 'development',
+module.exports = (environment, args) => ({
+  mode: args.mode ?? 'production',
   entry: './src/index.ts',
   target: 'node',
   externals: [nodeExternals()],
@@ -22,5 +22,5 @@ module.exports = {
       },
     ],
   },
-  watch: true, // Додайте це поле, якщо хочете використовувати режим спостереження
-};
+  watch: true,
+})

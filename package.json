@@ -8,8 +8,8 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev": "nodemon",
-    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --config=webpack.config.js --mode=development",
+    "build": "webpack --config=webpack.config.js --mode=production",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -35,7 +35,6 @@
     "url": "https://github.com/bohandsomn/error-handler-ai.git"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
     "ts-loader": "^9.4.4",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
