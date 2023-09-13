@@ -14,8 +14,12 @@ Also, artificial intelligence such as ChatGPT or Microsoft's Bing can respond im
 
 ## Installation
 
-```
+```console
 npm install error-handler-ai
+```
+
+```console
+yarn add error-handler-ai
 ```
 
 ## API Reference
@@ -42,7 +46,7 @@ npm install error-handler-ai
 
 Method `catch` takes one error and returns the solution.
 
-```
+```ts
 interface IAi {
   catch(error: unknown): Promise<string>
 }
@@ -50,14 +54,14 @@ interface IAi {
 
 #### IBuilderAi
 
-```
+```ts
 interface IBuilderAi {
-    setBing(options: IBingAiOptions): this
-    setChatGpt(options: IChatGptAiOptions): this
-    setGutHub(): this
-    setGoogle(): this
-    setStackOverflow(): this
-    build(): IAi
+  setBing(options: IBingAiOptions): this
+  setChatGpt(options: IChatGptAiOptions): this
+  setGutHub(): this
+  setGoogle(): this
+  setStackOverflow(): this
+  build(): IAi
 }
 ```
 
@@ -67,28 +71,28 @@ You can use `BuilderAi` to create an ai service that implements the IAi interfac
 
 **NOTE:** It is recommended to use in `development` mode.
 
-```
-import { BuilderAi } from "error-handler-ai"
+```ts
+import { BuilderAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new BuilderAi()
   .setBing({
-    cookie: process.env.BING_COOKIE!
+    cookie: process.env.BING_COOKIE!,
   })
   .setChatGpt({
-    apiKey: process.env.CHAT_GPT_API_KEY!
+    apiKey: process.env.CHAT_GPT_API_KEY!,
   })
   .setGoogle()
   .setGutHub()
   .setStackOverflow()
   .build()
 
-async  function  bootstrap() {
+async function bootstrap() {
   try {
-    throw  new  Error('database failed to connect')
+    throw new Error('database failed to connect')
   } catch (error) {
     if (isDev) {
-      const  solution  =  await  ai.catch(error)
+      const solution = await ai.catch(error)
       console.log(solution)
     }
   }
@@ -117,12 +121,12 @@ q=database%20failed%20to%20connect
 
 You can also use the services separately, namely: `BingAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
 
-```
-import { BingAi } from "error-handler-ai"
+```ts
+import { BingAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new BingAi({
-  cookie: process.env.BING_COOKIE!
+  cookie: process.env.BING_COOKIE!,
 })
 
 async function bootstrap() {
@@ -147,12 +151,12 @@ bootstrap()
 - Open the Application tab;
 - In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
 
-```
-import { ChatGptAi } from "error-handler-ai"
+```ts
+import { ChatGptAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new ChatGptAi({
-  apiKey: process.env.CHAT_GPT_API_KEY!
+  apiKey: process.env.CHAT_GPT_API_KEY!,
 })
 
 async function bootstrap() {
@@ -171,8 +175,8 @@ bootstrap()
 
 **NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
 
-```
-import { GitHubAi } from "error-handler-ai"
+```ts
+import { GitHubAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new GitHubAi()
@@ -191,8 +195,8 @@ async function bootstrap() {
 bootstrap()
 ```
 
-```
-import { GoogleAi } from "error-handler-ai"
+```ts
+import { GoogleAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new GoogleAi()
@@ -211,8 +215,8 @@ async function bootstrap() {
 bootstrap()
 ```
 
-```
-import { StackOverflowAi } from "error-handler-ai"
+```ts
+import { StackOverflowAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new StackOverflowAi()
