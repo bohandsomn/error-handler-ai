@@ -22,5 +22,5 @@ module.exports = (environment, args) => ({
       },
     ],
   },
-  watch: true,
+  watch: args.mode === 'development',
 })
