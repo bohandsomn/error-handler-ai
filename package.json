@@ -1,11 +1,11 @@
 {
   "name": "error-handler-ai",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Handles errors that may occur while the program is running. Under the hood of the program, modern solutions are used, which are actively used by developers now",
   "type": "commonjs",
   "main": "dist/index.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "webpack --config=webpack.config.js --mode=development",
