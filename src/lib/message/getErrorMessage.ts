@@ -1,4 +1,5 @@
 export function getErrorMessage(error: unknown): string {
+    const MAX_ERROR_MESSAGE_LENGTH = 100
     let message: string
     if (error instanceof Error) {
         message = error.message
@@ -9,8 +10,7 @@ export function getErrorMessage(error: unknown): string {
     } else {
         message = ''
     }
-    return message.replace(/@[^\s]+/g, '*')
-        .replace(/"[^"]+"/g, '*')
-        .slice(0, 100)
-        .replace(/ /g, '%20')
+    return encodeURIComponent(message
+        .replace(/[A-Z]:(\\[^:]+):[0-9]+:[0-9]+|"[A-Z]:(\\[^:]+):[0-9]+:[0-9]+"/g, '*')
+        .slice(0, MAX_ERROR_MESSAGE_LENGTH))
 }
