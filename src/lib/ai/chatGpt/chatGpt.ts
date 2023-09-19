@@ -18,8 +18,8 @@ export class ChatGptAi implements IAi {
     }
 
     async catch(error: unknown): Promise<string> {
+        const header = 'Possible ways according to ai ChatGPT'
         try {
-            const header = 'Possible ways according to ai ChatGPT'
             const task = 'Find the solution to the following error:'
             const message = getErrorMessage(error)
             const request = this.requestAdapter(task, message)
@@ -27,7 +27,7 @@ export class ChatGptAi implements IAi {
             const solution = this.responseAdapter(response)
             return `${header}:\n${solution}`
         } catch (error) {
-            return ''
+            return `${header}:\n`
         }
     }
 
