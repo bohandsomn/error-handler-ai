@@ -4,17 +4,18 @@
   "version": "0.1.0",
   "description": "Handles errors that may occur while the program is running. Under the hood of the program, modern solutions are used, which are actively used by developers now",
   "type": "commonjs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "scripts": {
-    "start": "node ./dist/index.js",
-    "dev": "webpack --config=webpack.config.js --mode=development",
-    "build": "webpack --config=webpack.config.js --mode=production",
+    "start": "node ./dist/index.mjs",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepublish": "npm run build"
   },
   "keywords": [
     "ChatGPT",
     "Bing",
+    "Bard",
     "StackOverflow",
     "Google",
     "GitHub",
@@ -35,14 +36,12 @@
     "url": "https://github.com/bohandsomn/error-handler-ai.git"
   },
   "devDependencies": {
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.2.2",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "webpack-node-externals": "^3.0.0"
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "openai": "^4.6.0",
-    "ws": "^8.14.1"
+    "bing-chat": "^0.2.3",
+    "googlebard": "^1.0.7",
+    "openai": "^4.6.0"
   }
 }
