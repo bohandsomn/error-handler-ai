@@ -2,7 +2,7 @@
 
 Handles errors that may occur while the program is running. Under the hood of the program, modern solutions are used, which are actively used by developers now.
 
-You can use this package to speed up error detection and resolution. Popular solutions such as `ChatGPT`, `Bing`, `StackOverflow`, `Google`, `GitHub` are used under the hood.
+You can use this package to speed up error detection and resolution. Popular solutions such as `ChatGPT`, `Bing`, `Bard`, `StackOverflow`, `Google`, `GitHub` are used under the hood.
 
 ## Objectives
 
@@ -33,6 +33,13 @@ yarn add error-handler-ai
 
 type IVariant = "Balanced" | "Precise" | "Creative"
 
+#### IBardAiOptions
+
+| Parameter | Type     | Description                                             |
+| :-------- | :------- | :------------------------------------------------------ |
+| `cookie`  | `string` | **Required**. \_\_Secure-{account}PSID cookie from Bard |
+| `account` | `number` | **Default:** `1`.                                       |
+
 #### IChatGptAiOptions
 
 | Parameter | Type     | Description                        |
@@ -58,6 +65,7 @@ interface IAi {
 interface IBuilderAi {
   setBing(options: IBingAiOptions): this
   setChatGpt(options: IChatGptAiOptions): this
+  setBard(options: IBardAiOptions): this
   setGutHub(): this
   setGoogle(): this
   setStackOverflow(): this
@@ -82,6 +90,9 @@ const ai = new BuilderAi()
   .setChatGpt({
     apiKey: process.env.CHAT_GPT_API_KEY!,
   })
+  .setBard({
+    cookie: process.env.BARD_COOKIE!,
+  })
   .setGoogle()
   .setGutHub()
   .setStackOverflow()
@@ -102,7 +113,7 @@ bootstrap()
 
 ### Example of response:
 
-```bash
+```console
 Possible ways to solve the problem:
 Possible ways according to ai Bing microsoft:
 There are various causes for database connection failures, such as incorrect database information, firewall settings, corrupt database, or unresponsive database server.
@@ -115,7 +126,7 @@ Possible ways according to StackOverflow:
 Go to the following link: https://stackoverflow.com/search?q=database%20failed%20to%20connect
 ```
 
-You can also use the services separately, namely: `BingAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
+You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
 
 ```ts
 import { BingAi } from 'error-handler-ai'
@@ -146,6 +157,36 @@ bootstrap()
 3. Open the dev tools tab <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>I</kbd>;
 4. Open the Application tab;
 5. In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
+
+```ts
+import { BardAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new BardAi({
+  cookie: process.env.BARD_COOKIE!,
+})
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
+
+**NOTE:** In order for you to be able to use `BardAi`, you must provide a `cookie` that you can receive in browser:
+
+1. Open your browser;
+2. Go to the Google Bard [chat page](https://bard.google.com/chat);
+3. Open the dev tools tab <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>I</kbd>;
+4. Open the Application tab;
+5. In Storage/Cookies/https://bard.google.com, find the cookie called `__Secure-1PSID` and copy its value.
 
 ```ts
 import { ChatGptAi } from 'error-handler-ai'
