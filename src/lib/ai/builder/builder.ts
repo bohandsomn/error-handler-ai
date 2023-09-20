@@ -3,6 +3,7 @@ import { BingAi, IBingAiOptions } from "../bing"
 import { ChatGptAi, IChatGptAiOptions } from "../chatGpt"
 import { App } from "../app"
 import { GitHubAi } from "../gitHub"
+import { BardAi, IBardAiOptions } from "../bard"
 import { GoogleAi } from "../google"
 import { StackOverflowAi } from "../stackOverflow"
 import { IAi } from "../type"
@@ -12,6 +13,7 @@ export class BuilderAi implements IBuilderAi {
     private bing: IAi | null = null
     private chatGpt: IAi | null = null
     private gutHub: IAi | null = null
+    private bard: IAi | null = null
     private google: IAi | null = null
     private stackOverflow: IAi | null = null
 
@@ -31,7 +33,12 @@ export class BuilderAi implements IBuilderAi {
     }
 
     setGoogle(): this {
-        this.google = new GoogleAi()
+        this.bard = new GoogleAi()
+        return this
+    }
+
+    setBard(options: IBardAiOptions): this {
+        this.bard = new BardAi(options)
         return this
     }
 
@@ -46,6 +53,7 @@ export class BuilderAi implements IBuilderAi {
             this.chatGpt,
             this.gutHub,
             this.google,
+            this.bard,
             this.stackOverflow
         ].filter((ai): ai is IAi => ai !== null)
         if (!ais.length) {
