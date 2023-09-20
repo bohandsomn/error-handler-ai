@@ -1,4 +1,4 @@
-import { BingChat, ChatMessage } from './lib'
+import { BingChat, ChatMessage } from 'bing-chat'
 import { Exception } from '../../exception'
 import { getErrorMessage } from '../../message'
 import { IAi } from '../type'
