@@ -56,6 +56,7 @@ Method `catch` takes one error and returns the solution.
 ```ts
 interface IAi {
   catch(error: unknown): Promise<string>
+  catch(error: unknown, onChunk: (solution: string) => void): void
 }
 ```
 
@@ -66,9 +67,9 @@ interface IBuilderAi {
   setBing(options: IBingAiOptions): this
   setChatGpt(options: IChatGptAiOptions): this
   setBard(options: IBardAiOptions): this
-  setGutHub(): this
-  setGoogle(): this
-  setStackOverflow(): this
+  setGitHub(options?: IGitHubAiOptions): this
+  setGoogle(options?: IGoogleAiOptions): this
+  setStackOverflow(options?: IStackOverflowAiOptions): this
   build(): IAi
 }
 ```
@@ -84,18 +85,18 @@ import { BuilderAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new BuilderAi()
+  .setGoogle()
+  .setGitHub()
+  .setStackOverflow()
+  .setBard({
+    cookie: process.env.BARD_COOKIE!,
+  })
   .setBing({
     cookie: process.env.BING_COOKIE!,
   })
   .setChatGpt({
     apiKey: process.env.CHAT_GPT_API_KEY!,
   })
-  .setBard({
-    cookie: process.env.BARD_COOKIE!,
-  })
-  .setGoogle()
-  .setGutHub()
-  .setStackOverflow()
   .build()
 
 async function bootstrap() {
