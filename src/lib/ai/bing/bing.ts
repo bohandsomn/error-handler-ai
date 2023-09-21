@@ -1,40 +1,31 @@
 import { BingChat, ChatMessage } from 'bing-chat'
 import { Exception } from '../../exception'
-import { getErrorMessage } from '../../message'
 import { IAi } from '../type'
 import { IBingAiOptions, IVariant } from './type'
+import { DecoratorAi } from '../decorator'
 
-export class BingAi implements IAi {
+export class BingAi extends DecoratorAi implements IAi {
     private readonly variant: IVariant
     private readonly client: BingChat
+    protected readonly header = 'Possible ways according to ai Bing microsoft:\n'
+    protected readonly task = 'Find the solution to the following error'
 
-    constructor(options: IBingAiOptions) {
+    constructor(options: IBingAiOptions)
+    constructor(
+        options: IBingAiOptions,
+        wrapper?: IAi,
+    ) {
+        super(wrapper)
         const { cookie, variant } = options
-        if (typeof cookie !== "string") {
+        if (typeof cookie !== 'string') {
             throw new Exception('cookie must be a string')
         }
         this.variant = variant ?? 'Creative'
         this.client = new BingChat({ cookie })
     }
 
-    async catch(error: unknown): Promise<string> {
-        const header = 'Possible ways according to ai Bing microsoft'
-        try {
-            const task = 'Find the solution to the following error:'
-            const message = getErrorMessage(error)
-            const request = this.requestAdapter(task, message)
-            const response = await this.client.sendMessage(request, {
-                variant: this.variant,
-            })
-            const solution = this.responseAdapter(response)
-            return `${header}:\n${solution}`
-        } catch (error) {
-            return `${header}:\n`
-        }
-    }
-
     private requestAdapter(task: string, message: string) {
-        return `${task} ${message}`
+        return `${task}: ${message}`
     }
 
     private responseAdapter(response: ChatMessage) {
@@ -49,5 +40,23 @@ export class BingAi implements IAi {
         } else {
             return input.trim()
         }
+    }
+
+    protected async getSolution(message: string): Promise<string> {
+        const request = this.requestAdapter(this.task, message)
+        const response = await this.client.sendMessage(request, {
+            variant: this.variant,
+        })
+        const solution = this.responseAdapter(response)
+        return solution
+    }
+
+    protected async stream(message: string, onChunk: (solution: string) => void): Promise<void> {
+        const request = this.requestAdapter(this.task, message)
+        await this.client.sendMessage(request, {
+            onProgress: (response) => {
+                onChunk(this.responseAdapter(response))
+            }
+        })
     }
 }

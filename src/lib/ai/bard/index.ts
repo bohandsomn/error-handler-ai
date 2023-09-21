@@ -1,2 +1,2 @@
 export * from './bard'
-export * from './type'
+export { IBardAiOptions } from './type'

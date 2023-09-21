@@ -1,16 +1,24 @@
-import { getErrorMessage } from "../../message"
-import { IAi } from "../type"
+import { DecoratorAi } from '../decorator'
+import { IAi } from '../type'
+import { IStackOverflowAiOptions } from './type'
 
-export class StackOverflowAi implements IAi {
-    async catch(error: unknown): Promise<string> {
-        try {
-            const header = 'Possible ways according to StackOverflow'
-            const task = 'Go to the following link:'
-            const message = getErrorMessage(error)
-            const link = `https://stackoverflow.com/search?q=${message}`
-            return `${header}:\n${task} ${link}`
-        } catch (error) {
-            return ''
-        }
+export class StackOverflowAi extends DecoratorAi implements IAi {
+    protected readonly header = 'Possible ways according to StackOverflow:\n'
+    protected readonly task = 'Go to the following link'
+
+    constructor(options: IStackOverflowAiOptions)
+    constructor(options: IStackOverflowAiOptions, wrapper?: IAi) {
+        super(wrapper)
+    }
+
+    protected async getSolution(message: string): Promise<string> {
+        const link = `https://stackoverflow.com/search?q=${message}`
+        const solution = `${this.task}: ${link}\n`
+        return solution
+    }
+
+    protected async stream(message: string, onChunk: (solution: string) => void): Promise<void> {
+        const solution = await this.getSolution(message)
+        return onChunk(solution)
     }
 }

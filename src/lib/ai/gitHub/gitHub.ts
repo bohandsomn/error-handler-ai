@@ -1,16 +1,24 @@
-import { getErrorMessage } from "../../message"
-import { IAi } from "../type"
+import { DecoratorAi } from '../decorator'
+import { IAi } from '../type'
+import { IGitHubAiOptions } from './type'
 
-export class GitHubAi implements IAi {
-    async catch(error: unknown): Promise<string> {
-        try {
-            const header = 'Possible ways according to GitHub'
-            const task = 'Go to the following link:'
-            const message = getErrorMessage(error)
-            const link = `https://github.com/search?q=${message}&type=issues`
-            return `${header}:\n${task} ${link}`
-        } catch (error) {
-            return ''
-        }
+export class GitHubAi extends DecoratorAi implements IAi {
+    protected readonly header = 'Possible ways according to GitHub:\n'
+    protected readonly task = 'Go to the following link'
+
+    constructor(options: IGitHubAiOptions)
+    constructor(options: IGitHubAiOptions, wrapper?: IAi) {
+        super(wrapper)
+    }
+
+    protected async getSolution(message: string): Promise<string> {
+        const link = `https://github.com/search?q=${message}&type=issues`
+        const solution = `${this.task}: ${link}\n`
+        return solution
+    }
+
+    protected async stream(message: string, onChunk: (solution: string) => void): Promise<void> {
+        const solution = await this.getSolution(message)
+        return onChunk(solution)
     }
 }

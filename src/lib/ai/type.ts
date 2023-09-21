@@ -14,4 +14,19 @@ export interface IAi {
      * @returns {Promise<string>} solution
      */
     catch(error: unknown): Promise<string>
+    /**
+     * 
+     * @param error unknown
+     * @param onChunk (solution: string) => void
+     * 
+     * @example
+     * try {
+     *     ...
+     * } catch (error) {
+     *     ai.catch(error, (solution: string) => process.stdout.write(solution))
+     * }
+     * 
+     * @returns {void}
+     */
+    catch(error: unknown, onChunk: (solution: string) => void): void
 }
