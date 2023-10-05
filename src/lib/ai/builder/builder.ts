@@ -7,37 +7,43 @@ import { GoogleAi, IGoogleAiOptions } from '../google'
 import { IStackOverflowAiOptions, StackOverflowAi } from '../stackOverflow'
 import { IAi } from '../type'
 import { IBuilderAi } from './type'
+import { IWriteSonicAiOptions, WriteSonicAi } from '../writeSonic'
 
 export class BuilderAi implements IBuilderAi {
     private ai?: IAi
 
     setBing(options: IBingAiOptions): this {
-        this.ai = new (BingAi as any)(options, this.ai)
+        this.ai = new BingAi({ ...options, wrapper: this.ai })
         return this
     }
 
     setChatGpt(options: IChatGptAiOptions): this {
-        this.ai = new (ChatGptAi as any)(options, this.ai)
+        this.ai = new ChatGptAi({ ...options, wrapper: this.ai })
         return this
     }
 
     setBard(options: IBardAiOptions): this {
-        this.ai = new (BardAi as any)(options, this.ai)
+        this.ai = new BardAi({ ...options, wrapper: this.ai })
+        return this
+    }
+
+    setWriteSonic(options: IWriteSonicAiOptions): this {
+        this.ai = new WriteSonicAi({ ...options, wrapper: this.ai })
         return this
     }
 
     setGitHub(options: IGitHubAiOptions = {}): this {
-        this.ai = new (GitHubAi as any)(options, this.ai)
+        this.ai = new GitHubAi({ ...options, wrapper: this.ai })
         return this
     }
 
     setGoogle(options: IGoogleAiOptions = {}): this {
-        this.ai = new (GoogleAi as any)(options, this.ai)
+        this.ai = new GoogleAi({ ...options, wrapper: this.ai })
         return this
     }
 
     setStackOverflow(options: IStackOverflowAiOptions = {}): this {
-        this.ai = new (StackOverflowAi as any)(options, this.ai)
+        this.ai = new StackOverflowAi({ ...options, wrapper: this.ai })
         return this
     }
 

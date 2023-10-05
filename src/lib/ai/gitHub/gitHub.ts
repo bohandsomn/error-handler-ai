@@ -6,9 +6,8 @@ export class GitHubAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to GitHub:\n'
     protected readonly task = 'Go to the following link'
 
-    constructor(options: IGitHubAiOptions)
-    constructor(options: IGitHubAiOptions, wrapper?: IAi) {
-        super(wrapper)
+    constructor(options: IGitHubAiOptions) {
+        super(options.wrapper)
     }
 
     protected async getSolution(message: string): Promise<string> {

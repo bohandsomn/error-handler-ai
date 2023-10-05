@@ -49,6 +49,12 @@ type IVariant = "Balanced" | "Precise" | "Creative"
 
 type IModel = "babbage-002" | "davinci-002" | "text-davinci-003" | "text-davinci-002" | "text-davinci-001" | "code-davinci-002" | "text-curie-001" | "text-babbage-001" | "text-ada-001"
 
+#### IWriteSonicAiOptions
+
+| Parameter | Type     | Description                                           |
+| :-------- | :------- | :---------------------------------------------------- |
+| `token`   | `string` | **Required**. Writesonic_Token cookie from WriteSonic |
+
 #### IAi
 
 Method `catch` takes one error and returns the solution.
@@ -67,6 +73,7 @@ interface IBuilderAi {
   setBing(options: IBingAiOptions): this
   setChatGpt(options: IChatGptAiOptions): this
   setBard(options: IBardAiOptions): this
+  setWriteSonic(options: IWriteSonicAiOptions): this
   setGitHub(options?: IGitHubAiOptions): this
   setGoogle(options?: IGoogleAiOptions): this
   setStackOverflow(options?: IStackOverflowAiOptions): this
@@ -75,6 +82,8 @@ interface IBuilderAi {
 ```
 
 ## Usage
+
+### BuilderAi
 
 You can use `BuilderAi` to create an ai service that implements the IAi interface. It is a combination of services that you add with setters.
 
@@ -97,6 +106,9 @@ const ai = new BuilderAi()
   .setChatGpt({
     apiKey: process.env.CHAT_GPT_API_KEY!,
   })
+  .setWriteSonic({
+    token: process.env.WRITE_SONIC_TOKEN!,
+  })
   .build()
 
 async function bootstrap() {
@@ -106,28 +118,36 @@ async function bootstrap() {
     if (isDev) {
       const solution = await ai.catch(error)
       console.log(solution)
+      // Or
+      ai.catch(error, (solution: string) => process.stdout.write(solution))
     }
   }
 }
 bootstrap()
 ```
 
-### Example of response:
+#### Example of response:
 
 ```console
-Possible ways to solve the problem:
-Possible ways according to ai Bing microsoft:
-There are various causes for database connection failures, such as incorrect database information, firewall settings, corrupt database, or unresponsive database server.
-Depending on the type of database you are using, you may need to troubleshoot different issues.
-Possible ways according to GitHub:
-Go to the following link: https://github.com/search?q=database%20failed%20to%20connect&type=issues
 Possible ways according to Google:
 Go to the following link: https://www.google.com/search?q=database%20failed%20to%20connect
+Possible ways according to GitHub:
+Go to the following link: https://github.com/search?q=database%20failed%20to%20connect&type=issues
 Possible ways according to StackOverflow:
 Go to the following link: https://stackoverflow.com/search?q=database%20failed%20to%20connect
+Possible ways according to ai Bing microsoft:
+There are various causes for database connection failures, such as incorrect database information...
+Possible ways according to ai ChatGPT:
+I'm sorry to hear that you're having trouble connecting to a database. There can be several...
+Possible ways according to WriteSonic:
+When a database fails to connect, it can be due to various reasons. Here are some common troubleshooting...
 ```
 
-You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi` and `StackOverflowAi`. They have the same API and implement one interface - IAi.
+### Ai
+
+You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`. They have the same API and implement one interface - IAi.
+
+#### BingAi
 
 ```ts
 import { BingAi } from 'error-handler-ai'
@@ -159,6 +179,10 @@ bootstrap()
 4. Open the Application tab;
 5. In Storage/Cookies/https://www.bing.com, find the cookie called `_U` and copy its value.
 
+**Warning:** If you get an error or an empty string, try clearing your cookies and logging in again.
+
+#### BardAi
+
 ```ts
 import { BardAi } from 'error-handler-ai'
 
@@ -189,6 +213,10 @@ bootstrap()
 4. Open the Application tab;
 5. In Storage/Cookies/https://bard.google.com, find the cookie called `__Secure-1PSID` and copy its value.
 
+**Warning:** If you get an error or an empty string, try clearing your cookies and logging in again.
+
+#### ChatGptAi
+
 ```ts
 import { ChatGptAi } from 'error-handler-ai'
 
@@ -213,6 +241,42 @@ bootstrap()
 
 **NOTE:** In order for you to be able to use `ChatGptAi`, you need to provide an `apiKey`, which you can get in your [OpenAI account](https://platform.openai.com/account/api-keys).
 
+#### WriteSonicAi
+
+```ts
+import { WriteSonicAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new WriteSonicAi({
+  token: process.env.WRITE_SONIC_TOKEN!,
+})
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
+
+**NOTE:** In order for you to be able to use `WriteSonicAi`, you must provide a `token` that you can receive in your browser:
+
+1. Open your browser;
+2. Go to the WriteSonic [app page](https://app.writesonic.com/);
+3. Open the dev tools tab <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>I</kbd>;
+4. Open the Application tab;
+5. In Storage/Cookies/https://app.writesonic.com, find the cookie called `Writesonic_Token` and copy its value.
+
+**Warning:** If you get an error or an empty string, try clearing your cookies and logging in again.
+
+#### GitHubAi
+
 ```ts
 import { GitHubAi } from 'error-handler-ai'
 
@@ -233,6 +297,8 @@ async function bootstrap() {
 bootstrap()
 ```
 
+#### GoogleAi
+
 ```ts
 import { GoogleAi } from 'error-handler-ai'
 
@@ -252,6 +318,8 @@ async function bootstrap() {
 
 bootstrap()
 ```
+
+#### StackOverflowAi
 
 ```ts
 import { StackOverflowAi } from 'error-handler-ai'

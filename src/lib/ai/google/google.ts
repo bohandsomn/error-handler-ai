@@ -6,9 +6,8 @@ export class GoogleAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to Google:\n'
     protected readonly task = 'Go to the following link'
 
-    constructor(options: IGoogleAiOptions)
-    constructor(options: IGoogleAiOptions, wrapper?: IAi) {
-        super(wrapper)
+    constructor(options: IGoogleAiOptions) {
+        super(options.wrapper)
     }
 
     protected async getSolution(message: string): Promise<string> {

@@ -1,6 +1,7 @@
 import { CompletionCreateParamsBase } from 'openai/src/resources/completions'
+import { IWithWrapper } from '../type'
 
-export interface IChatGptAiOptions {
+export interface IChatGptAiOptions extends IWithWrapper {
     apiKey: string
     /**
      * @default "text-davinci-003"

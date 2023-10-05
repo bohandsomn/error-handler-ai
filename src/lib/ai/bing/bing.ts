@@ -10,12 +10,8 @@ export class BingAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to ai Bing microsoft:\n'
     protected readonly task = 'Find the solution to the following error'
 
-    constructor(options: IBingAiOptions)
-    constructor(
-        options: IBingAiOptions,
-        wrapper?: IAi,
-    ) {
-        super(wrapper)
+    constructor(options: IBingAiOptions) {
+        super(options.wrapper)
         const { cookie, variant } = options
         if (typeof cookie !== 'string') {
             throw new Exception('cookie must be a string')

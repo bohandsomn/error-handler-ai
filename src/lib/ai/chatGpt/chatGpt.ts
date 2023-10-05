@@ -10,12 +10,8 @@ export class ChatGptAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to ai ChatGPT:\n'
     protected readonly task = 'Find the solution to the following error'
 
-    constructor(options: IChatGptAiOptions)
-    constructor(
-        options: IChatGptAiOptions,
-        wrapper?: IAi,
-    ) {
-        super(wrapper)
+    constructor(options: IChatGptAiOptions) {
+        super(options.wrapper)
         const { apiKey, model } = options
         if (typeof apiKey !== 'string') {
             throw new Exception('apiKey must be a string')

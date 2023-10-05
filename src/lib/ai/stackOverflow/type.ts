@@ -1,1 +1,3 @@
-export interface IStackOverflowAiOptions { }
+import { IWithWrapper } from '../type'
+
+export interface IStackOverflowAiOptions extends IWithWrapper { }

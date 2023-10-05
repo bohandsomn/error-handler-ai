@@ -9,12 +9,8 @@ export class BardAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to Bard:\n'
     protected readonly task = 'Find the solution to the following error'
 
-    constructor(options: IBardAiOptions)
-    constructor(
-        options: IBardAiOptions,
-        wrapper?: IAi,
-    ) {
-        super(wrapper)
+    constructor(options: IBardAiOptions) {
+        super(options.wrapper)
         try {
             const { cookie, account = 1, ...bardOptions } = options
             if (typeof cookie !== 'string') {

@@ -30,3 +30,10 @@ export interface IAi {
      */
     catch(error: unknown, onChunk: (solution: string) => void): void
 }
+
+export interface IWithWrapper {
+    /**
+     * @type {IAi | undefined}
+     */
+    wrapper?: IAi
+}

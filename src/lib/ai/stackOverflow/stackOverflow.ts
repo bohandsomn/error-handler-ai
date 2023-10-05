@@ -6,9 +6,8 @@ export class StackOverflowAi extends DecoratorAi implements IAi {
     protected readonly header = 'Possible ways according to StackOverflow:\n'
     protected readonly task = 'Go to the following link'
 
-    constructor(options: IStackOverflowAiOptions)
-    constructor(options: IStackOverflowAiOptions, wrapper?: IAi) {
-        super(wrapper)
+    constructor(options: IStackOverflowAiOptions) {
+        super(options.wrapper)
     }
 
     protected async getSolution(message: string): Promise<string> {

@@ -1,4 +1,6 @@
-export interface IBingAiOptions {
+import { IWithWrapper } from '../type'
+
+export interface IBingAiOptions extends IWithWrapper {
     cookie: string
     /**
      * @default "Creative"

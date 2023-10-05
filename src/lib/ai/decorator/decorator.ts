@@ -18,7 +18,7 @@ export abstract class DecoratorAi implements IAi {
         try {
             const message = getErrorMessage(error)
             if (onChunk) {
-                await this.wrapper?.catch(message, onChunk)
+                await this.wrapper?.catch(error, onChunk)
                 onChunk(this.header)
                 await this.stream(message, onChunk)
             }
