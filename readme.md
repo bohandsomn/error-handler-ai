@@ -26,34 +26,34 @@ yarn add error-handler-ai
 
 #### IBingAiOptions
 
-| Parameter | Type       | Description                                  |
-| :-------- | :--------- | :------------------------------------------- |
-| `cookie`  | `string`   | **Required**. \_U cookie from Microsoft Edge |
-| `variant` | `IVariant` | **Default:** `"Creative"`.                   |
+| Parameter | Type       | Description                                             |
+| :-------- | :--------- | :------------------------------------------------------ |
+| `cookie`  | `string`   | **Required**. \_U cookie from [Microsoft Edge](#bingai) |
+| `variant` | `IVariant` | **Default:** `"Creative"`.                              |
 
 type IVariant = "Balanced" | "Precise" | "Creative"
 
 #### IBardAiOptions
 
-| Parameter | Type     | Description                                             |
-| :-------- | :------- | :------------------------------------------------------ |
-| `cookie`  | `string` | **Required**. \_\_Secure-{account}PSID cookie from Bard |
-| `account` | `number` | **Default:** `1`.                                       |
+| Parameter | Type     | Description                                                        |
+| :-------- | :------- | :----------------------------------------------------------------- |
+| `cookie`  | `string` | **Required**. \_\_Secure-{account}PSID cookie from [Bard](#bardai) |
+| `account` | `number` | **Default:** `1`.                                                  |
 
 #### IChatGptAiOptions
 
-| Parameter | Type     | Description                        |
-| :-------- | :------- | :--------------------------------- |
-| `apiKey`  | `string` | **Required**. apiKey from OpenAI   |
-| `model`   | `IModel` | **Default:** `"text-davinci-003"`. |
+| Parameter | Type     | Description                                    |
+| :-------- | :------- | :--------------------------------------------- |
+| `apiKey`  | `string` | **Required**. apiKey from [OpenAI](#chatgptai) |
+| `model`   | `IModel` | **Default:** `"text-davinci-003"`.             |
 
 type IModel = "babbage-002" | "davinci-002" | "text-davinci-003" | "text-davinci-002" | "text-davinci-001" | "code-davinci-002" | "text-curie-001" | "text-babbage-001" | "text-ada-001"
 
 #### IWriteSonicAiOptions
 
-| Parameter | Type     | Description                                           |
-| :-------- | :------- | :---------------------------------------------------- |
-| `token`   | `string` | **Required**. Writesonic_Token cookie from WriteSonic |
+| Parameter | Type     | Description                                                            |
+| :-------- | :------- | :--------------------------------------------------------------------- |
+| `token`   | `string` | **Required**. Writesonic_Token cookie from [WriteSonic](#writesonicai) |
 
 #### IAi
 
