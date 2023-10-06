@@ -55,6 +55,12 @@ type IModel = "babbage-002" | "davinci-002" | "text-davinci-003" | "text-davinci
 | :-------- | :------- | :--------------------------------------------------------------------- |
 | `token`   | `string` | **Required**. Writesonic_Token cookie from [WriteSonic](#writesonicai) |
 
+#### IYouChatAiOptions
+
+| Parameter | Type     | Description                                               |
+| :-------- | :------- | :-------------------------------------------------------- |
+| `cookie`  | `string` | **Required**. \_\_cf_bm cookie from [YouChat](#youchatai) |
+
 #### IAi
 
 Method `catch` takes one error and returns the solution.
@@ -74,6 +80,8 @@ interface IBuilderAi {
   setChatGpt(options: IChatGptAiOptions): this
   setBard(options: IBardAiOptions): this
   setWriteSonic(options: IWriteSonicAiOptions): this
+  setYouChat(options: IYouChatAiOptions): this
+  setYou(options?: IYouAiOptions): this
   setGitHub(options?: IGitHubAiOptions): this
   setGoogle(options?: IGoogleAiOptions): this
   setStackOverflow(options?: IStackOverflowAiOptions): this
@@ -97,6 +105,10 @@ const ai = new BuilderAi()
   .setGoogle()
   .setGitHub()
   .setStackOverflow()
+  .setYou()
+  .setYouChat({
+    cookie: process.env.YOU_CHAT_COOKIE!,
+  })
   .setBard({
     cookie: process.env.BARD_COOKIE!,
   })
@@ -135,6 +147,10 @@ Possible ways according to GitHub:
 Go to the following link: https://github.com/search?q=database%20failed%20to%20connect&type=issues
 Possible ways according to StackOverflow:
 Go to the following link: https://stackoverflow.com/search?q=database%20failed%20to%20connect
+Possible ways according to You:
+Go to the following link: https://you.com/search?q=database%20failed%20to%20connect&fromSearchBar=true&tbm=youchat
+Possible ways according to YouChat:
+To find the solution to the "database failed to connect" error, we need to determine the specific database system you are using...
 Possible ways according to ai Bing microsoft:
 There are various causes for database connection failures, such as incorrect database information...
 Possible ways according to ai ChatGPT:
@@ -145,7 +161,7 @@ When a database fails to connect, it can be due to various reasons. Here are som
 
 ### Ai
 
-You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`. They have the same API and implement one interface - IAi.
+You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`, `YouAi`, `YouChatAi`. They have the same API and implement one interface - IAi.
 
 #### BingAi
 
@@ -274,6 +290,62 @@ bootstrap()
 5. In Storage/Cookies/https://app.writesonic.com, find the cookie called `Writesonic_Token` and copy its value.
 
 **Warning:** If you get an error or an empty string, try clearing your cookies and logging in again.
+
+#### YouChatAi
+
+```ts
+import { YouChatAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new YouChatAi({
+  cookie: process.env.YOU_CHAT_COOKIE!,
+})
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
+
+**NOTE:** In order for you to be able to use `YouChatAi`, you must provide a `cookie` that you can receive in your browser:
+
+1. Open the your browser;
+2. Go to the You [chat page](https://you.com/search?fromSearchBar=true&tbm=youchat);
+3. Open the dev tools tab <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>I</kbd>;
+4. Open the Application tab;
+5. In Storage/Cookies/https://you.com/, find the cookie called `__cf_bm` and copy its value.
+
+**Warning:** If you get an error or an empty string, try clearing your cookies and logging in again.
+
+#### YouAi
+
+```ts
+import { YouAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new YouAi()
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
 
 #### GitHubAi
 

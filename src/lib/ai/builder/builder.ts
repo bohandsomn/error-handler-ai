@@ -8,6 +8,8 @@ import { IStackOverflowAiOptions, StackOverflowAi } from '../stackOverflow'
 import { IAi } from '../type'
 import { IBuilderAi } from './type'
 import { IWriteSonicAiOptions, WriteSonicAi } from '../writeSonic'
+import { IYouChatAiOptions, YouChatAi } from '../youChat'
+import { IYouAiOptions, YouAi } from '../you'
 
 export class BuilderAi implements IBuilderAi {
     private ai?: IAi
@@ -29,6 +31,16 @@ export class BuilderAi implements IBuilderAi {
 
     setWriteSonic(options: IWriteSonicAiOptions): this {
         this.ai = new WriteSonicAi({ ...options, wrapper: this.ai })
+        return this
+    }
+
+    setYouChat(options: IYouChatAiOptions): this {
+        this.ai = new YouChatAi({ ...options, wrapper: this.ai })
+        return this
+    }
+
+    setYou(options: IYouAiOptions = {}): this {
+        this.ai = new YouAi({ ...options, wrapper: this.ai })
         return this
     }
 
