@@ -85,6 +85,7 @@ interface IBuilderAi {
   setGitHub(options?: IGitHubAiOptions): this
   setGoogle(options?: IGoogleAiOptions): this
   setStackOverflow(options?: IStackOverflowAiOptions): this
+  setPerplexity(options?: IPerplexityAiOptions): this
   build(): IAi
 }
 ```
@@ -106,6 +107,7 @@ const ai = new BuilderAi()
   .setGitHub()
   .setStackOverflow()
   .setYou()
+  .setPerplexity()
   .setYouChat({
     cookie: process.env.YOU_CHAT_COOKIE!,
   })
@@ -149,6 +151,8 @@ Possible ways according to StackOverflow:
 Go to the following link: https://stackoverflow.com/search?q=database%20failed%20to%20connect
 Possible ways according to You:
 Go to the following link: https://you.com/search?q=database%20failed%20to%20connect&fromSearchBar=true&tbm=youchat
+Possible ways according to Perplexity:
+Go to the following link: https://www.perplexity.ai/search?q=database%20failed%20to%20connect
 Possible ways according to YouChat:
 To find the solution to the "database failed to connect" error, we need to determine the specific database system you are using...
 Possible ways according to ai Bing microsoft:
@@ -161,7 +165,7 @@ When a database fails to connect, it can be due to various reasons. Here are som
 
 ### Ai
 
-You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`, `YouAi`, `YouChatAi`. They have the same API and implement one interface - IAi.
+You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`, `YouAi`, `YouChatAi`, `Perplexity`. They have the same API and implement one interface - IAi.
 
 #### BingAi
 
@@ -398,6 +402,28 @@ import { StackOverflowAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new StackOverflowAi()
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
+
+#### PerplexityAi
+
+```ts
+import { PerplexityAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new PerplexityAi()
 
 async function bootstrap() {
   try {
