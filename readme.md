@@ -86,6 +86,7 @@ interface IBuilderAi {
   setGoogle(options?: IGoogleAiOptions): this
   setStackOverflow(options?: IStackOverflowAiOptions): this
   setPerplexity(options?: IPerplexityAiOptions): this
+  setCharacter(options?: ICharacterAiOptions): this
   build(): IAi
 }
 ```
@@ -108,6 +109,7 @@ const ai = new BuilderAi()
   .setStackOverflow()
   .setYou()
   .setPerplexity()
+  .setCharacter()
   .setYouChat({
     cookie: process.env.YOU_CHAT_COOKIE!,
   })
@@ -153,6 +155,8 @@ Possible ways according to You:
 Go to the following link: https://you.com/search?q=database%20failed%20to%20connect&fromSearchBar=true&tbm=youchat
 Possible ways according to Perplexity:
 Go to the following link: https://www.perplexity.ai/search?q=database%20failed%20to%20connect
+Possible ways according to Character:
+Go to the following link: https://beta.character.ai/chat?q=database%20failed%20to%20connect&char=YntB_ZeqRq2l_aVf2gWDCZl4oBttQzDvhj9cXafWcF8
 Possible ways according to YouChat:
 To find the solution to the "database failed to connect" error, we need to determine the specific database system you are using...
 Possible ways according to ai Bing microsoft:
@@ -165,7 +169,7 @@ When a database fails to connect, it can be due to various reasons. Here are som
 
 ### Ai
 
-You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`, `YouAi`, `YouChatAi`, `Perplexity`. They have the same API and implement one interface - IAi.
+You can also use the services separately, namely: `BingAi`, `BardAi`, `ChatGptAi`, `GitHubAi`, `GoogleAi`, `StackOverflowAi`, `WriteSonicAi`, `YouAi`, `YouChatAi`, `Perplexity`, `CharacterAi`. They have the same API and implement one interface - IAi.
 
 #### BingAi
 
@@ -424,6 +428,28 @@ import { PerplexityAi } from 'error-handler-ai'
 
 const isDev = process.env.NODE_ENV === 'development'
 const ai = new PerplexityAi()
+
+async function bootstrap() {
+  try {
+    throw new Error('database failed to connect')
+  } catch (error) {
+    if (isDev) {
+      const solution = await ai.catch(error)
+      console.log(solution)
+    }
+  }
+}
+
+bootstrap()
+```
+
+#### CharacterAi
+
+```ts
+import { CharacterAi } from 'error-handler-ai'
+
+const isDev = process.env.NODE_ENV === 'development'
+const ai = new CharacterAi()
 
 async function bootstrap() {
   try {
