@@ -11,6 +11,7 @@ import { IWriteSonicAiOptions, WriteSonicAi } from '../writeSonic'
 import { IYouChatAiOptions, YouChatAi } from '../youChat'
 import { IYouAiOptions, YouAi } from '../you'
 import { IPerplexityAiOptions, PerplexityAi } from '../perplexity'
+import { CharacterAi, ICharacterAiOptions } from '../character'
 
 export class BuilderAi implements IBuilderAi {
     private ai?: IAi
@@ -62,6 +63,11 @@ export class BuilderAi implements IBuilderAi {
 
     setPerplexity(options: IPerplexityAiOptions = {}): this {
         this.ai = new PerplexityAi({ ...options, wrapper: this.ai })
+        return this
+    }
+
+    setCharacter(options: ICharacterAiOptions = {}): this {
+        this.ai = new CharacterAi({ ...options, wrapper: this.ai })
         return this
     }
 

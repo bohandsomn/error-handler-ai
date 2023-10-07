@@ -9,6 +9,7 @@ import { IWriteSonicAiOptions } from '../writeSonic'
 import { IYouChatAiOptions } from '../youChat'
 import { IYouAiOptions } from '../you'
 import { IPerplexityAiOptions } from '../perplexity'
+import { ICharacterAiOptions } from '../character'
 
 export interface IBuilderAi {
     setBing(options: IBingAiOptions): this
@@ -21,5 +22,6 @@ export interface IBuilderAi {
     setGoogle(options?: IGoogleAiOptions): this
     setStackOverflow(options?: IStackOverflowAiOptions): this
     setPerplexity(options?: IPerplexityAiOptions): this
+    setCharacter(options?: ICharacterAiOptions): this
     build(): IAi
 }
