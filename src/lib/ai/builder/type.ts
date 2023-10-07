@@ -8,6 +8,7 @@ import { IStackOverflowAiOptions } from '../stackOverflow'
 import { IWriteSonicAiOptions } from '../writeSonic'
 import { IYouChatAiOptions } from '../youChat'
 import { IYouAiOptions } from '../you'
+import { IPerplexityAiOptions } from '../perplexity'
 
 export interface IBuilderAi {
     setBing(options: IBingAiOptions): this
@@ -19,5 +20,6 @@ export interface IBuilderAi {
     setGitHub(options?: IGitHubAiOptions): this
     setGoogle(options?: IGoogleAiOptions): this
     setStackOverflow(options?: IStackOverflowAiOptions): this
+    setPerplexity(options?: IPerplexityAiOptions): this
     build(): IAi
 }

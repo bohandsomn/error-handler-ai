@@ -10,6 +10,7 @@ import { IBuilderAi } from './type'
 import { IWriteSonicAiOptions, WriteSonicAi } from '../writeSonic'
 import { IYouChatAiOptions, YouChatAi } from '../youChat'
 import { IYouAiOptions, YouAi } from '../you'
+import { IPerplexityAiOptions, PerplexityAi } from '../perplexity'
 
 export class BuilderAi implements IBuilderAi {
     private ai?: IAi
@@ -56,6 +57,11 @@ export class BuilderAi implements IBuilderAi {
 
     setStackOverflow(options: IStackOverflowAiOptions = {}): this {
         this.ai = new StackOverflowAi({ ...options, wrapper: this.ai })
+        return this
+    }
+
+    setPerplexity(options: IPerplexityAiOptions = {}): this {
+        this.ai = new PerplexityAi({ ...options, wrapper: this.ai })
         return this
     }
 
